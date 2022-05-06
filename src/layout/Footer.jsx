@@ -2,16 +2,13 @@ import React from 'react'
 
 const Footer = () => {
   return (
-    <footer className='page-footer teal lighten-3'>
-      <div className='footer-copyright'>
-        <div className='container'>
-          © {new Date().getFullYear()} Copyright Text
-          <a className='grey-text text-lighten-4 right' href='#!'>
-            Repo
-          </a>
-        </div>
+    <div className='footer'>
+      <div className='container'>
+        <div className='year'>{new Date().getFullYear()}</div>
+        <p> © Copyright</p>
+        <div className='repo'>Repo</div>
       </div>
-    </footer>
+    </div>
   )
 }
 
