@@ -6,7 +6,7 @@ import SearchError from '../components/SearchError'
 const API_KEY = process.env.REACT_APP_API_KEY
 
 const Main = () => {
-  const URL = `http://www.omdbapi.com/?apikey=${API_KEY}`
+  const URL = `https://www.omdbapi.com/?apikey=${API_KEY}`
 
   const [movies, setMovies] = useState([])
   const [isLoading, setIsLoading] = useState(true)
@@ -14,13 +14,18 @@ const Main = () => {
 
   useEffect(() => {
     const getData = async () => {
-      const res = await fetch(`${URL}&s=matrix`)
-      const data = await res.json()
-      if (data.Search) {
-        setIsSearchError(false)
+      try {
+        const res = await fetch(`${URL}&s=matrix`)
+        const data = await res.json()
+        if (data.Search) {
+          setIsSearchError(false)
+          setIsLoading(false)
+          setMovies(data.Search)
+        } else setIsSearchError(true)
+      } catch (err) {
+        console.error(err)
         setIsLoading(false)
-        setMovies(data.Search)
-      } else setIsSearchError(true)
+      }
     }
     getData()
   }, [])
